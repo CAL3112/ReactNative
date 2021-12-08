@@ -3,9 +3,9 @@ import {Button, View, SafeAreaView, Text, TextInput, TouchableOpacity, Alert} fr
 import Header from '../components/Header';
 import {styles} from '../core/styles';
 import {emailValide, mdpValide, nomValide} from '../core/functions';
+import {connect} from "react-redux";
 
-
-export default class Homepage extends React.Component {
+class Subscribe extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -19,7 +19,12 @@ export default class Homepage extends React.Component {
     const bonEmail = emailValide(this.state.email);
     const bonNom = nomValide(this.state.nom);
     const bonMDP = mdpValide(this.state.password);
-    if(bonEmail && bonMDP && bonNom){navigate('Subscribed', {nom: this.state.nom}, {email: this.state.email})}
+    if(bonEmail && bonMDP && bonNom){
+        const action = {type: "ADD_USER", value: {nom: this.state.nom,email: this.state.email,password: this.state.password}}
+        this.props.dispatch(action)
+        console.log(this.props)
+        this.props.navigation.navigate('Subscribed', {nom: this.state.nom, email: this.state.email})
+    }
     else if(!bonEmail && !bonMDP && !bonNom){Alert.alert("Le nom, l'adresse mail et le mot de passe sont incorrects")}
     else if(!bonMDP && !bonNom){Alert.alert("Le nom et le mot de passe sont incorrects")}
     else if(!bonEmail && !bonNom){Alert.alert("Le nom et l'adresse sont incorrects")}
@@ -96,3 +101,8 @@ export default class Homepage extends React.Component {
     
   }
 }
+
+const mapStateToProps = (state) => {
+    return state
+}
+export default connect(mapStateToProps)(Subscribe)
