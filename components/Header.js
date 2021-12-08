@@ -13,6 +13,5 @@ export default class Header extends React.Component {
                 <Text style={styles.titre}>{title}</Text>
             </View>
             )
-        
     }
 }

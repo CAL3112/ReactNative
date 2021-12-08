@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { StyleSheet, Button, View, SafeAreaView, Text, TextInput, TouchableOpacity, Alert} from 'react-native';
+import {Button, View, SafeAreaView, Text, TextInput, TouchableOpacity, Alert} from 'react-native';
 import Header from '../components/Header';
 import {styles} from '../core/styles';
+import {emailValide, mdpValide, nomValide} from '../core/functions';
 
 
 export default class Homepage extends React.Component {
@@ -12,6 +13,20 @@ export default class Homepage extends React.Component {
         password: "",
         nom: ""
         };
+  }
+  validationSubscibe(){
+    const {navigate} = this.props.navigation;
+    const bonEmail = emailValide(this.state.email);
+    const bonNom = nomValide(this.state.nom);
+    const bonMDP = mdpValide(this.state.password);
+    if(bonEmail && bonMDP && bonNom){navigate('Subscribed', {nom: this.state.nom}, {email: this.state.email})}
+    else if(!bonEmail && !bonMDP && !bonNom){Alert.alert("Le nom, l'adresse mail et le mot de passe sont incorrects")}
+    else if(!bonMDP && !bonNom){Alert.alert("Le nom et le mot de passe sont incorrects")}
+    else if(!bonEmail && !bonNom){Alert.alert("Le nom et l'adresse sont incorrects")}
+    else if(!bonEmail && !bonMDP){Alert.alert("L'adresse mail et le mot de passe sont incorrects")}
+    else if(!bonEmail){Alert.alert("L'adresse mail est incorrecte")}
+    else if(!bonMDP){Alert.alert("Le mot de passe est incorrect")}
+    else {Alert.alert("Le nom est incorrect")}
   }
   render(){
     const {navigate} = this.props.navigation;
@@ -65,9 +80,7 @@ export default class Homepage extends React.Component {
                     <Button
                     color= "royalblue"
                     title="S'incrire"
-                    onPress={() => {
-                        if (this.state.email === "" || this.state.password === "") {Alert.alert("Veuillez remplir tous les champs.")
-                        } else {navigate('Subscribed',{mail: this.state.email})}}}
+                    onPress={() => this.validationSubscibe()}
                     />
                 </View>
                 <View style={styles.phrase}>

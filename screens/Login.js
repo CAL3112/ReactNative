@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Button, View, SafeAreaView, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import Header from '../components/Header';
 import {styles} from '../core/styles';
-
+import {emailValide, mdpValide} from '../core/functions';
 
 export default class Login extends React.Component {
   constructor(props){
@@ -12,8 +12,21 @@ export default class Login extends React.Component {
         password: ""
         };
   }
+
+  validationLogin(){
+    const {navigate} = this.props.navigation;
+    const bonEmail = emailValide(this.state.email);
+    const bonMDP = mdpValide(this.state.password);
+    if(bonEmail && bonMDP){navigate('Connected', {mail: this.state.email})}
+    else if(!bonEmail && !bonMDP){Alert.alert("L'adresse mail et le mot de passe sont incorrects")} 
+    else if(!bonEmail){Alert.alert("L'adresse mail est incorrecte")}
+    else {Alert.alert("Le mot de passe est incorrect")}
+  }
+  
   render(){
-        const {navigate} = this.props.navigation;
+    const {navigate} = this.props.navigation;
+
+
     return(
             <SafeAreaView style={styles.container}>
                 <View>
@@ -45,23 +58,17 @@ export default class Login extends React.Component {
                     ref={(input) => { this.secondTextInput = input; }}
                     />
                     <View style={styles.bouton}>
-            <Button
-              title="Se Connecter"
-              onPress={() => {
-                if (this.state.email === "" || this.state.password === "") {Alert.alert("Veuillez remplir tous les champs.")
-                } else {navigate('Connected',{mail: this.state.email})}
-            }
-            }
-              color= "royalblue"
-
-            />
-            </View>
-            
-            <View style={styles.phrase}>
-                <TouchableOpacity onPress={() => navigate('Subscribe')}>
-                   <Text style={styles.lien}>Inscrivez-vous</Text>
-                </TouchableOpacity>
-            </View>
+                    <Button
+                      title="Se Connecter"
+                      color= "royalblue"
+                      onPress={() => this.validationLogin()}
+                    />
+                    </View>
+                    <View style={styles.phrase}>
+                        <TouchableOpacity onPress={() => navigate('Subscribe')}>
+                          <Text style={styles.lien}>Inscrivez-vous</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </SafeAreaView>
     )

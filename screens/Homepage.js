@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { StyleSheet, Button, View, SafeAreaView} from 'react-native';
+import {Button, View, SafeAreaView} from 'react-native';
 import Header from '../components/Header';
 import {styles} from '../core/styles';
-
 
 export default class Homepage extends React.Component {
   constructor(props){
@@ -19,7 +18,6 @@ export default class Homepage extends React.Component {
               title="Connexion"
               onPress={() => navigate('Login')}
               color= "royalblue"
-
             />
             </View>
             <View style={styles.bouton}>
@@ -34,5 +32,3 @@ export default class Homepage extends React.Component {
     )
   }
 }
-
-

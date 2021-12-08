@@ -3,7 +3,6 @@ import {View, SafeAreaView, Text, Button} from 'react-native';
 import Header from '../components/Header';
 import {styles} from '../core/styles';
 
-
 export default class Connected extends React.Component {
   constructor(props){
     super(props);
@@ -14,7 +13,7 @@ export default class Connected extends React.Component {
         <SafeAreaView style={styles.container}>
             <View>
             <Header title = 'Vous êtes connecté'/>
-            <Text>{this.props.route.params.mail}, bienvenu sur notre application</Text>
+            <Text>Connecté en tant que {this.props.route.params.mail}</Text>
             </View>
             <View style={styles.bouton}>
                 <Button
@@ -27,4 +26,3 @@ export default class Connected extends React.Component {
     )
   };
 };
-
