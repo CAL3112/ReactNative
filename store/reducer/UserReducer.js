@@ -1,4 +1,4 @@
-const initialState = { users:[]}
+const initialState = {users:[]}
 
 function UserReducer(state = initialState, action) {
     let nextState

@@ -11,7 +11,7 @@ class Subscribe extends React.Component {
     this.state = {
         email: "",
         password: "",
-        nom: ""
+        nom: "",
         };
   }
   validationSubscibe(){
@@ -45,7 +45,6 @@ class Subscribe extends React.Component {
                     style={{ height: 40, borderColor: 'gray', borderWidth: 1, margin: 10, padding: 10, borderRadius: 5}}
                     value={this.state.nom}
                     onChangeText={text => this.setState({nom: text})}
-                    autoCapitalize="none"
                     placeholder="Nom"
                     onSubmitEditing={() => { this.secondTextInput.focus(); }}
                 />

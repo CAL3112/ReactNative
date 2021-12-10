@@ -17,9 +17,9 @@ export default class Connected extends React.Component {
             </View>
             <View style={styles.bouton}>
                 <Button
-                title="Deconnexion"
-                onPress={() => navigate('Homepage')}
-                color= "royalblue"
+                  title="Deconnexion"
+                  onPress={() => navigate('Homepage')}
+                  color= "royalblue"
                 />
             </View>
         </SafeAreaView>
