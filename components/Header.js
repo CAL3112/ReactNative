@@ -6,11 +6,10 @@ export default class Header extends React.Component {
     constructor(props) {
         super(props);
     }
-    render(){
-        const {title} = this.props
+    render(){ 
         return(
             <View>
-                <Text style={styles.titre}>{title}</Text>
+                <Text style={styles.titre}>{this.props.title}</Text>
             </View>
             )
     }

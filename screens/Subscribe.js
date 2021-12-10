@@ -48,7 +48,6 @@ class Subscribe extends React.Component {
                     autoCapitalize="none"
                     placeholder="Nom"
                     onSubmitEditing={() => { this.secondTextInput.focus(); }}
-
                 />
                 <TextInput
                     label="Email"
@@ -63,10 +62,7 @@ class Subscribe extends React.Component {
                     placeholder="Adresse mail"
                     onSubmitEditing={() => { this.thirdTextInput.focus(); }}
                     ref={(input) => { this.secondTextInput = input; }}
-
-
                 />
-                        
                 <TextInput
                     label="password"
                     returnKeyType="done"
@@ -79,7 +75,6 @@ class Subscribe extends React.Component {
                     placeholder="Mot de passe"
                     secureTextEntry={true}
                     ref={(input) => { this.thirdTextInput = input; }}
-
                 />
                 <View style={styles.bouton}>
                     <Button
@@ -97,8 +92,6 @@ class Subscribe extends React.Component {
             </View>
         </SafeAreaView>
     )
-
-    
   }
 }
 

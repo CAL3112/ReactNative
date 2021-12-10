@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
 
     titre: {
         fontSize: 25,
-        color: "#3386FF",
+        color: "royalblue",
         textAlign: "center",
         marginBottom: 25
     },

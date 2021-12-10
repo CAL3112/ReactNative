@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import Store from './store/configStore'
 
 const Stack = createNativeStackNavigator();
+
 const App = () => {
   return (
     <Provider store={Store}>
