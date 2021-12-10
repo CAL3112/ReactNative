@@ -6,7 +6,7 @@ import {emailValide, mdpValide, nomValide} from '../core/functions';
 import {connect} from "react-redux";
 import * as SQLite from 'expo-sqlite';
 
-class Subscribe extends React.Component {
+class MdpOublie extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -38,7 +38,7 @@ class Subscribe extends React.Component {
     return(
         <SafeAreaView style={styles.container}>
             <View>
-                <Header title = 'Inscription'/>
+                <Header title = 'Mot de passe oublié'/>
                 <TextInput
                     label="Nom"
                     returnKeyType="next"
@@ -71,27 +71,29 @@ class Subscribe extends React.Component {
                     autoCapitalize="none"
                     autoCompleteType="password"
                     textContentType="password"
-                    placeholder="Mot de passe"
+                    placeholder="Nouveau mot de passe"
                     secureTextEntry={true}
                     ref={(input) => { this.thirdTextInput = input; }}
                 />
                 <View style={styles.bouton}>
                     <Button
                     color= "royalblue"
-                    title="S'incrire"
+                    title="Changer de mot de passe"
                     onPress={() => this.validationSubscibe()}
                     />
                 </View>
-                <View style={styles.phrase}>
-                    <TouchableOpacity
-                    onPress={() => navigate('Login')}>
-                    <Text style={styles.lien}>Connectez-vous !</Text>
-                    </TouchableOpacity>
+                <View style={styles.bouton}>
+                    <Button
+                    color= "royalblue"
+                    title="retour a l' Accueil"
+                    onPress={() => navigate('Homepage')}
+                    />
                 </View>
+                
             </View>
         </SafeAreaView>
     )
   }
 }
 
-export default Subscribe
+export default MdpOublie

@@ -4,6 +4,7 @@ import Login from './screens/Login';
 import Subscribe from './screens/Subscribe';
 import Subscribed from './screens/Subscribed';
 import Connected from './screens/Connected';
+import MdpOublie from './screens/MdpOublie';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider } from "react-redux";
@@ -21,6 +22,7 @@ const App = () => {
           <Stack.Screen name="Subscribe" component={Subscribe}/>
           <Stack.Screen name="Subscribed" component={Subscribed}/>
           <Stack.Screen name="Connected" component={Connected}/>
+          <Stack.Screen name="MdpOublie" component={MdpOublie}/>
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

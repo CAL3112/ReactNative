@@ -28,7 +28,7 @@ class Login extends React.Component {
         for(var i=0; i<_array.length; i++){
           if(_array[i].mail == this.state.email && _array[i].mdp == this.state.password) {
             userConnect = true
-            this.props.navigation.navigate('Connected')
+            this.props.navigation.navigate('Connected', {name: _array[i].name})
           }
         }
           if(userConnect == false) {
@@ -86,6 +86,11 @@ class Login extends React.Component {
                     <View style={styles.phrase}>
                         <TouchableOpacity onPress={() => navigate('Subscribe')}>
                           <Text style={styles.lien}>Inscrivez-vous</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.phrase}>
+                        <TouchableOpacity onPress={() => navigate('MdpOublie')}>
+                          <Text style={styles.lien}>Mot de passe oublié?</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
