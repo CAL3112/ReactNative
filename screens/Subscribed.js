@@ -14,7 +14,7 @@ export default class Connected extends React.Component {
         <SafeAreaView style={styles.container}>
             <View>
             <Header title = 'Vous êtes inscrit'/>
-            <Text>Inscrit en tant que : {this.props.route.params.nom} {this.props.route.params.email}</Text>
+            <Text>Inscrit en tant que : </Text>
             </View>
             <View style={styles.bouton}>
                 <Button

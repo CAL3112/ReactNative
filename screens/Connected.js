@@ -13,7 +13,7 @@ export default class Connected extends React.Component {
         <SafeAreaView style={styles.container}>
             <View>
             <Header title = 'Vous êtes connecté'/>
-            <Text>Connecté en tant que {this.props.route.params.mail}</Text>
+            <Text>Connecté en tant que </Text>
             </View>
             <View style={styles.bouton}>
                 <Button

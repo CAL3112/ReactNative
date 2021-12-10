@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import {styles} from '../core/styles';
 import {emailValide, mdpValide} from '../core/functions';
 import {connect} from "react-redux";
+import * as SQLite from 'expo-sqlite';
 
 
 class Login extends React.Component {
@@ -20,17 +21,22 @@ class Login extends React.Component {
     const bonEmail = emailValide(this.state.email);
     const bonMDP = mdpValide(this.state.password);
     if(bonEmail && bonMDP){
-      const {users} = this.props
-      var userConnect = false
-      for(var i=0; i<users.length; i++){
-        if(users[i].email == this.state.email && users[i].password == this.state.password) {
-          userConnect = true
-          this.props.navigation.navigate('Connected', {mail: this.state.email})}
+      const db = SQLite.openDatabase("database.db");
+      db.transaction(tx => {tx.executeSql("select * from user where mdp=? AND mail=?", [this.state.password, this.state.email], (_, {rows: {_array}})=>
+      {console.log(_array)
+        var userConnect = false
+        for(var i=0; i<_array.length; i++){
+          if(_array[i].mail == this.state.email && _array[i].mdp == this.state.password) {
+            userConnect = true
+            this.props.navigation.navigate('Connected')
+          }
         }
-        if(userConnect == false) {
-          Alert.alert("Le couple identifiant mot de passe n'est pas bon.")
-        }
+          if(userConnect == false) {
+            Alert.alert("Le couple identifiant mot de passe n'est pas bon.")
+          }
       }
+      )})}
+      
      
     else if(!bonEmail && !bonMDP){Alert.alert("L'adresse mail et le mot de passe sont incorrects")} 
     else if(!bonEmail){Alert.alert("L'adresse mail est incorrecte")}
@@ -39,7 +45,6 @@ class Login extends React.Component {
   
   render(){
     const {navigate} = this.props.navigation;
-    console.log(this.props)
 
     return(
             <SafeAreaView style={styles.container}>
@@ -88,7 +93,5 @@ class Login extends React.Component {
     )
   }
 }
-const mapStateToProps = (state) => {
-  return state
-}
-export default connect(mapStateToProps)(Login)
+
+export default Login

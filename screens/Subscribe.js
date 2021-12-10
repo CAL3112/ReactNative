@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import {styles} from '../core/styles';
 import {emailValide, mdpValide, nomValide} from '../core/functions';
 import {connect} from "react-redux";
+import * as SQLite from 'expo-sqlite';
 
 class Subscribe extends React.Component {
   constructor(props){
@@ -20,10 +21,9 @@ class Subscribe extends React.Component {
     const bonNom = nomValide(this.state.nom);
     const bonMDP = mdpValide(this.state.password);
     if(bonEmail && bonMDP && bonNom){
-        const action = {type: "ADD_USER", value: {nom: this.state.nom,email: this.state.email,password: this.state.password}}
-        this.props.dispatch(action)
-        console.log(this.props)
-        this.props.navigation.navigate('Subscribed', {nom: this.state.nom, email: this.state.email})
+        const db = SQLite.openDatabase("database.db");
+        db.transaction(tx => {tx.executeSql("insert into user (name, mail, mdp) values (?,?,?)", [this.state.nom,this.state.email,this.state.password,]);});
+        this.props.navigation.navigate('Subscribed')//,{nom: this.state.nom, email: this.state.email}
     }
     else if(!bonEmail && !bonMDP && !bonNom){Alert.alert("Le nom, l'adresse mail et le mot de passe sont incorrects")}
     else if(!bonMDP && !bonNom){Alert.alert("Le nom et le mot de passe sont incorrects")}
@@ -94,7 +94,4 @@ class Subscribe extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-    return state
-}
-export default connect(mapStateToProps)(Subscribe)
+export default Subscribe
