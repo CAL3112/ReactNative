@@ -6,7 +6,7 @@ export const emailValide = adresseMail => {
 }
 
 export const mdpValide = mdp => {
-    const typomdp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+    const typomdp = /^(?=.*[a-z])(?=.{1,})/;
     if(!mdp || mdp.length <= 0) return false;
     if(!typomdp.test(mdp)) return false;
     return true

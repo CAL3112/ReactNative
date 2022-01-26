@@ -21,9 +21,9 @@ class Login extends React.Component {
     const bonEmail = emailValide(this.state.email);
     const bonMDP = mdpValide(this.state.password);
     if(bonEmail && bonMDP){
-      const db = SQLite.openDatabase("database.db");
-      db.transaction(tx => {tx.executeSql("select * from user where mdp=? AND mail=?", [this.state.password, this.state.email], (_, {rows: {_array}})=>
-      {console.log(_array)
+        const db = SQLite.openDatabase("database.db");
+        db.transaction(tx => {tx.executeSql("select * from user where mdp=? AND mail=?", [this.state.password, this.state.email], (_, {rows: {_array}})=>
+        {console.log(_array)
         var userConnect = false
         for(var i=0; i<_array.length; i++){
           if(_array[i].mail == this.state.email && _array[i].mdp == this.state.password) {

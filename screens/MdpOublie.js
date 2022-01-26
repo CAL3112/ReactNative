@@ -21,9 +21,36 @@ class MdpOublie extends React.Component {
     const bonNom = nomValide(this.state.nom);
     const bonMDP = mdpValide(this.state.password);
     if(bonEmail && bonMDP && bonNom){
-        const db = SQLite.openDatabase("database.db");
-        db.transaction(tx => {tx.executeSql("insert into user (name, mail, mdp) values (?,?,?)", [this.state.nom,this.state.email,this.state.password,]);});
-        this.props.navigation.navigate('Subscribed', {name: this.state.nom})//,{nom: this.state.nom, email: this.state.email}
+
+        const formData = new FormData();
+        formData.append("mail", this.state.email)
+        formData.append("password", this.state.password)
+
+        fetch('http://jdevalik.fr/api/updateser.php', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                "Content-Type": "multipart/form-data"
+            },
+        }).then((response) => response.json())
+            .then((json) => {
+                if(json == false){
+                Alert.alert(
+                    'Erreur',
+                    'L\'e-mail saisi existe déjà. Veuillez saisir une autre adresse mail ou vous connecter.',
+                    [
+                        {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    ],
+                    {cancelable: false},
+                );
+            } else {
+                this.props.navigation.navigate('Subscribed', {name: this.state.nom});
+            }
+            })
+            .catch((error) => {
+                console.error(error);
+            }
+            );
     }
     else if(!bonEmail && !bonMDP && !bonNom){Alert.alert("Le nom, l'adresse mail et le mot de passe sont incorrects")}
     else if(!bonMDP && !bonNom){Alert.alert("Le nom et le mot de passe sont incorrects")}
